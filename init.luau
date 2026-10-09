@@ -8,15 +8,19 @@
             Drawing = false,
             Debug = false,
             Network = false
-        }
+        },
+        Checks = {},
     }
     local function check(name, fn)
         results.Total = results.Total + 1
+        local temp = table.insert(results.Checks,name)
         if fn ~= nil then
             results.Passed = results.Passed + 1
+            temp = true
             return true
         else
             table.insert(results.Missing, name)
+            temp = false
             return false
         end
     end
