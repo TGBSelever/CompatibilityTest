@@ -13,14 +13,14 @@
     }
     local function check(name, fn)
         results.Total = results.Total + 1
-        local temp = table.insert(results.Checks,name)
+        
         if fn ~= nil then
             results.Passed = results.Passed + 1
-            temp = true
+            results.Checks[results.Total] = {check=name,suc=true}
             return true
         else
             table.insert(results.Missing, name)
-            temp = false
+            results.Checks[results.Total] = {check=name,suc=false}
             return false
         end
     end
