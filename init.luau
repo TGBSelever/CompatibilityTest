@@ -117,7 +117,8 @@
     local i_loaded = check("getloadedmodules", getloadedmodules)
     local i_hidden = check("gethiddenproperty", gethiddenproperty)
     local i_sethidden = check("sethiddenproperty", sethiddenproperty)
-    results.Capabilities.Instances = (i_nil and i_instances and i_gc and i_scripts and i_loaded and i_hidden and i_sethidden)
+    local i_save = check("saveinstance", saveinstance)
+    results.Capabilities.Instances = (i_nil and i_instances and i_gc and i_scripts and i_loaded and i_hidden and i_sethidden and i_save)
 
     local n_conn = check("getconnections", getconnections or get_signal_cons)
     local n_fire = check("firesignal", firesignal or fire_replicate_signal)
@@ -138,7 +139,9 @@
     local m_hwid = check("gethwid", gethwid)
     local m_req = check("require", require)
     local m_con = check("const",const)
-    results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con)
+    local m_game = check("game",game)
+    local m_service = check("GetService", game:GetService("Players"))
+    results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con and m_game and m_service)
 
     local er_1 = check("xyz (SHOULD ERROR)",xyz,true)
     local er_2 = check("fire (SHOULD ERROR)",fire,true)
