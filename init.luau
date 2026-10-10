@@ -98,7 +98,11 @@
     local fs_list = check("listfiles", listfiles)
     local fs_delf = check("delfile", delfile)
     local fs_delfo = check("delfolder", delfolder)
-    results.Capabilities.Filesystem = (fs_read and fs_write and fs_app and fs_isf and fs_isfo and fs_make and fs_list and fs_delf and fs_delfo)
+    local fs_genv = check("getgenv", getgenv)
+    local fs_fenv = check("getfenv", getfenv)
+    local fs_renv = check("getrenv", getrenv)
+    local fs_reg = check("getreg", getreg or getregistry)
+    results.Capabilities.Filesystem = (fs_read and fs_write and fs_app and fs_isf and fs_isfo and fs_make and fs_list and fs_delf and fs_delfo and fs_genv and fs_fenv and fs_renv and fs_reg)
 
     local h_fn = check("hookfunction", hookfunction)
     local h_meta = check("hookmetamethod", hookmetamethod)
@@ -133,18 +137,13 @@
     local m_req = check("request", request or http.request or http_request)
     local m_hwid = check("gethwid", gethwid)
     local m_req = check("require", require)
-    results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid)
+    local m_con = check("const",const)
+    results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con)
 
     local er_1 = check("xyz (SHOULD ERROR)",xyz,true)
     local er_2 = check("fire (SHOULD ERROR)",fire,true)
     local er_3 = check("delete (SHOULD ERROR)",delete,true)
     results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
-
-    local l_con = check("const",const)
-    local temp = 3//4
-    local l_div = check("x//y", temp)
-    temp = "a"..="b"
-    local l_str = check("abc..=def", temp)
 
     results.Percentage = math.floor((results.Passed / results.Total) * 100)
     return results
