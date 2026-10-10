@@ -16,21 +16,21 @@
         if not reverse then
         if fn ~= nil then
             results.Passed = results.Passed + 1
-            results.Checks[results.Total] = {check=name,suc=true}
+            results.Checks[name] = {check=name,suc=true}
             return true
         else
             table.insert(results.Missing, name)
-            results.Checks[results.Total] = {check=name,suc=false}
+            results.Checks[name] = {check=name,suc=false}
             return false
         end
         else
         if fn == nil then
             results.Passed = results.Passed + 1
-            results.Checks[results.Total] = {check=name,suc=true}
+            results.Checks[name] = {check=name,suc=true}
             return true
         else
             table.insert(results.Missing, name)
-            results.Checks[results.Total] = {check=name,suc=false}
+            results.Checks[name] = {check=name,suc=false}
             return false
         end
         end
