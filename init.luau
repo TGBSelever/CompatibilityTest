@@ -102,7 +102,8 @@
     local fs_fenv = check("getfenv", getfenv)
     local fs_renv = check("getrenv", getrenv)
     local fs_reg = check("getreg", getreg or getregistry)
-    results.Capabilities.Filesystem = (fs_read and fs_write and fs_app and fs_isf and fs_isfo and fs_make and fs_list and fs_delf and fs_delfo and fs_genv and fs_fenv and fs_renv and fs_reg)
+    local fs_ast = check("getcustomasset", getcustomasset)
+    results.Capabilities.Filesystem = (fs_ast and fs_read and fs_write and fs_app and fs_isf and fs_isfo and fs_make and fs_list and fs_delf and fs_delfo and fs_genv and fs_fenv and fs_renv and fs_reg)
 
     local h_fn = check("hookfunction", hookfunction)
     local h_meta = check("hookmetamethod", hookmetamethod)
