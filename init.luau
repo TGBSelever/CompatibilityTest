@@ -140,5 +140,9 @@
     local er_3 = check("delete (SHOULD ERROR)",delete,true)
     results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
 
+    local l_con = check("const",const)
+    local l_div = check("x//y", 3//4)
+    local l_str = check("abc..=def", "a"..="b")
+
     results.Percentage = math.floor((results.Passed / results.Total) * 100)
     return results
