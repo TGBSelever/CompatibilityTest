@@ -11,9 +11,9 @@
         },
         Checks = {},
     }
-    local function check(name, fn)
+    local function check(name, fn, reverse)
         results.Total = results.Total + 1
-        
+        if not reverse then
         if fn ~= nil then
             results.Passed = results.Passed + 1
             results.Checks[results.Total] = {check=name,suc=true}
@@ -22,6 +22,17 @@
             table.insert(results.Missing, name)
             results.Checks[results.Total] = {check=name,suc=false}
             return false
+        end
+        else
+        if fn == nil then
+            results.Passed = results.Passed + 1
+            results.Checks[results.Total] = {check=name,suc=true}
+            return true
+        else
+            table.insert(results.Missing, name)
+            results.Checks[results.Total] = {check=name,suc=false}
+            return false
+        end
         end
     end
     local c_inval = cache and check("cache.invalidate", cache.invalidate) or check("cache.invalidate", nil)
@@ -121,7 +132,13 @@
     local m_clip = check("setclipboard", setclipboard or toclipboard)
     local m_req = check("request", request or http.request or http_request)
     local m_hwid = check("gethwid", gethwid)
+    local m_req = check("require", require)
     results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid)
+
+    local er_1 = check("xyz (SHOULD ERROR)",xyz,true)
+    local er_2 = check("fire (SHOULD ERROR)",fire,true)
+    local er_3 = check("delete (SHOULD ERROR)",delete,true)
+    results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
 
     results.Percentage = math.floor((results.Passed / results.Total) * 100)
     return results
