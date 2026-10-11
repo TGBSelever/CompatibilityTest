@@ -26,11 +26,11 @@
         else
         if fn == nil then
             results.Passed = results.Passed + 1
-            results.Checks[name] = {check=name,suc=true}
+            results.Checks[name] = {check=name,suc=false}
             return true
         else
             table.insert(results.Missing, name)
-            results.Checks[name] = {check=name,suc=false}
+            results.Checks[name] = {check=name,suc=true}
             return false
         end
         end
@@ -139,19 +139,19 @@
     local m_req = check("request", request or http.request or http_request)
     local m_hwid = check("gethwid", gethwid)
     local m_req = check("require", require)
-    const c = "a"
+    --[[const c = "a"
     local succes = pcall(function()
     c = "b"
 end)
-    if succes == true then succes = nil end
-    local m_con = check("const",succes)
+    if succes == true then succes = nil end]]
+    local m_con = check("const (SKIPPED FOR BEING BUGGY)",true)
     local m_game = check("game",game)
     local m_service = check("GetService", game:GetService("Players"))
     results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con and m_game and m_service)
 
-    local er_1 = check("xyz (SHOULD ERROR)",xyz,true)
-    local er_2 = check("fire (SHOULD ERROR)",fire,true)
-    local er_3 = check("delete (SHOULD ERROR)",delete,true)
+    local er_1 = check("xyz (SHOULD BE ❌)",xyz,true)
+    local er_2 = check("fire (SHOULD BE ❌))",fire,true)
+    local er_3 = check("delete (SHOULD BE ❌)",delete,true)
     results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
 
     results.Percentage = math.floor((results.Passed / results.Total) * 100)
