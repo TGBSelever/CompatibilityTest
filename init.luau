@@ -139,7 +139,9 @@
     local m_req = check("request", request or http.request or http_request)
     local m_hwid = check("gethwid", gethwid)
     local m_req = check("require", require)
-    local m_con = check("const",const)
+    const c = "a"
+    c = "b"
+    local m_con = check("const",c == "a")
     local m_game = check("game",game)
     local m_service = check("GetService", game:GetService("Players"))
     results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con and m_game and m_service)
