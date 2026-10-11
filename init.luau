@@ -150,7 +150,7 @@ end)
     results.Capabilities.Miscellaneous = (m_load and m_id and m_clip and m_req and m_hwid and m_con and m_game and m_service)
 
     local er_1 = check("xyz (SHOULD BE ❌)",xyz,true)
-    local er_2 = check("fire (SHOULD BE ❌))",fire,true)
+    local er_2 = check("fire (SHOULD BE ❌)",fire,true)
     local er_3 = check("delete (SHOULD BE ❌)",delete,true)
     results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
 
