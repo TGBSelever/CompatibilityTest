@@ -155,4 +155,4 @@ end)
     results.Capabilities.FalseChecks = (er_1 and er_2 and er_3)
 
     results.Percentage = math.floor((results.Passed / results.Total) * 100)
-    return results
+    return game:GetService("HttpService"):JSONEncode(results)
